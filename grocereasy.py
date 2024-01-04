@@ -1,20 +1,75 @@
 import streamlit as st
+import sqlite3
+import datetime
+import os
 
+# Initialize the database connection
+DB_PATH = 'Groceries.db'
+conn = sqlite3.connect(DB_PATH, check_same_thread=False)
+cursor = conn.cursor()
+
+# Create the table if it doesn't exist
+cursor.execute('''
+    CREATE TABLE IF NOT EXISTS groceries (
+        id INTEGER PRIMARY KEY,
+        product_name TEXT,
+        unit_volume TEXT,
+        unit TEXT,
+        price REAL,
+        store_name TEXT,
+        date_entered DATE
+    )
+''')
+conn.commit()
+
+# Function to insert data into the database
+def insert_into_db(product_dict):
+    cursor.execute('''
+        INSERT INTO groceries (product_name, unit_volume, unit, price, store_name, date_entered)
+        VALUES (:product_name, :unit_volume, :unit, :price, :store_name, :date_entered)
+    ''', product_dict)
+    conn.commit()
+
+# Function to fetch unique product names from the database
+def print_unique_product_names_from_db():
+    cursor.execute("SELECT DISTINCT product_name FROM groceries")
+    unique_names = cursor.fetchall()
+    return [name[0] for name in unique_names]  # Return a list of names
+
+# Streamlit UI
 st.title('GroceryEasy: Track Your Groceries')
 
+# Display unique product names
+unique_names = print_unique_product_names_from_db()
+st.subheader("Unique Product Names:")
+st.write(unique_names)
+
+# Streamlit form for product data entry
 with st.form(key='product_form'):
+    st.write("Enter product details:")
     product_name = st.text_input("Product name")
     unit_volume = st.text_input("Unit volume")
     unit = st.text_input("Unit")
     price = st.number_input("Price", min_value=0.0, format="%.2f")
     store_name = st.text_input("Store name")
     submit_button = st.form_submit_button(label='Add Product')
-st.title('GroceryEasy: Track Your Groceries')
 
 if submit_button:
-    # Code to handle the product data
-    # For example, adding it to a list or database
+    date_entered = datetime.datetime.now().strftime("%d:%m:%Y")
+    product_dict = {
+        "product_name": product_name,
+        "unit_volume": unit_volume,
+        "unit": unit,
+        "price": price,
+        "store_name": store_name,
+        "date_entered": date_entered
+    }
 
-st.subheader("Unique Product Names")
-# Code to fetch and display unique product names
+    # Insert the product data into the database
+    insert_into_db(product_dict)
+    st.success('Product Added Successfully!')
 
+    # Update the list of unique product names
+    unique_names = print_unique_product_names_from_db()
+    st.subheader("Updated Unique Product Names:")
+    st.write(unique_names)
