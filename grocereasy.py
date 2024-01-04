@@ -2,8 +2,8 @@ import streamlit as st
 import sqlite3
 import datetime
 import os
-import matplotlib.pyplot as plt
-import pandas as pd
+#import matplotlib.pyplot as plt
+#import pandas as pd
 
 # Initialize the database connection
 DB_PATH = 'Groceries.db'
