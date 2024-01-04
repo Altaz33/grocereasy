@@ -40,11 +40,11 @@ def print_unique_product_names_from_db():
     return [name[0] for name in unique_names]  # Return a list of names
 
 # Streamlit UI
-st.title('GroceryEasy: Track Your Groceries')
+st.title('GroceryEasy: Track Your Recurring Groceries Easily')
 
 # Display unique product names
 unique_names = print_unique_product_names_from_db()
-st.subheader("Unique Product Names:")
+st.subheader("Previously bough (no duplicates):")
 st.write(unique_names)
 
 # Streamlit form for product data entry
