@@ -1,5 +1,3 @@
-pip install matplotlib
-
 import streamlit as st
 import sqlite3
 import datetime
@@ -80,22 +78,3 @@ if submit_button:
     unique_names = print_unique_product_names_from_db()
     st.subheader("Updated Unique Product Names:")
     st.write(unique_names)
-
-#Matplot and pandas graphs
-# Example: Creating a simple time series plot
-df = pd.DataFrame({
-    "Date": ["2021-01-01", "2021-01-02", "2021-01-03"],
-    "Apples": [3, 2, None],
-    "Bananas": [None, 3, 2]
-})
-df['Date'] = pd.to_datetime(df['Date'])
-plt.figure(figsize=(10, 4))
-plt.plot(df['Date'], df['Apples'], marker='o', label='Apples')
-plt.plot(df['Date'], df['Bananas'], marker='o', label='Bananas')
-plt.xlabel('Date')
-plt.ylabel('Quantity Purchased')
-plt.title('Product Purchases Over Time')
-plt.legend()
-
-# Display the plot in Streamlit
-st.pyplot(plt)
