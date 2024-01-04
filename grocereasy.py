@@ -50,11 +50,11 @@ st.write(unique_names)
 # Streamlit form for product data entry
 with st.form(key='product_form'):
     st.write("Enter product details:")
-    product_name = st.text_input("Product name", help="Enter the name of the product. E.g., Apples")
+    product_name = st.text_input("Product name", help="Enter the name of the product. E.g., apples")
     unit_volume = st.text_input("Unit volume", help="Enter the volume as a whole number. E.g., 2")
-    unit = st.text_input("Unit", help="Enter the unit of measurement. E.g., kg, liters")
+    unit = st.text_input("Unit", help="Enter the unit correctly abbreviated: kg, g, mg, l, ml or piece for whole items)
     price = st.number_input("Price", min_value=0.0, format="%.2f", help="Enter the price per unit. E.g., 1.99")
-    store_name = st.text_input("Store name", help="Enter the name of the store. E.g., Supermarket X")
+    store_name = st.text_input("Store name", help="Enter the name of the store. E.g., auchan, pingodoce")
     submit_button = st.form_submit_button(label='Add Product')
 
 if submit_button:
