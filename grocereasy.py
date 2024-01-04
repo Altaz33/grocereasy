@@ -8,12 +8,15 @@ DB_PATH = 'Groceries.db'
 conn = sqlite3.connect(DB_PATH, check_same_thread=False)
 cursor = conn.cursor()
 
+# Recreate the table to ensure new table is created with updated values. Required after making changes to the table to reflect values.
+#cursor.execute('DROP TABLE IF EXISTS groceries')
+
 # Create the table if it doesn't exist
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS groceries (
         id INTEGER PRIMARY KEY,
         product_name TEXT,
-        unit_volume TEXT,
+        unit_volume INTEGER,
         unit TEXT,
         price REAL,
         store_name TEXT,
@@ -53,6 +56,13 @@ with st.form(key='product_form'):
     price = st.number_input("Price", min_value=0.0, format="%.2f")
     store_name = st.text_input("Store name")
     submit_button = st.form_submit_button(label='Add Product')
+
+# Streamlit user info help details
+product_name = st.text_input("Product name", help="Enter the name of the product. E.g., Apples")
+unit_volume = st.text_input("Unit volume", help="Enter the volume as a whole number. E.g., 2")
+unit = st.text_input("Unit", help="Enter the unit of measurement. E.g., kg, liters")
+price = st.number_input("Price", min_value=0.0, format="%.2f", help="Enter the price per unit. E.g., 1.99")
+store_name = st.text_input("Store name", help="Enter the name of the store. E.g., Supermarket X")
 
 if submit_button:
     date_entered = datetime.datetime.now().strftime("%d:%m:%Y")
