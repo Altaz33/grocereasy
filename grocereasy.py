@@ -44,7 +44,7 @@ st.title('GroceryEasy: Track Your Recurring Groceries Easily')
 
 # Display unique product names
 unique_names = print_unique_product_names_from_db()
-st.subheader("Previously bough (no duplicates):")
+st.subheader("Previously bought (no duplicates):")
 st.write(unique_names)
 
 # Streamlit form for product data entry
