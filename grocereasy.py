@@ -64,7 +64,7 @@ def print_unique_product_names_from_db():
     return [name[0] for name in unique_names]  # Return a list of names
 
 # Streamlit UI
-st.title('GroceryEasy: Track Your Recurring Groceries Easily')
+st.title('Conjuwiz')
 
 # Display unique product names
 unique_names = print_unique_product_names_from_db()
