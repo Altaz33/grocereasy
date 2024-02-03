@@ -1,6 +1,7 @@
 import streamlit as st
 #base64 for background
 import base64
+import requests
 import sqlite3
 import datetime
 import os
