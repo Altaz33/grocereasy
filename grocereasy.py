@@ -30,6 +30,7 @@ cursor.execute('''
 ''')
 conn.commit()
 
+# define and Fetch background and encode it
 def set_background_from_url(url):
     response = requests.get(url)
     if response.status_code == 200:
@@ -45,8 +46,8 @@ def set_background_from_url(url):
             unsafe_allow_html=True
         )
 
-# At the beginning of your Streamlit app
-set_background_from_url('https://raw.githubusercontent.com/Altaz33/grocereasy/main/Base%20colors%20ConjuWiz.webp')
+# Background image code
+set_background_from_url('https://raw.githubusercontent.com/Altaz33/grocereasy/main/Base%20colors%20ConjuWiz2.webp')
 
 # Function to insert data into the database
 def insert_into_db(product_dict):
