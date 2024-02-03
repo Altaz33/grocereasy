@@ -47,7 +47,7 @@ def set_background_from_url(url):
         )
 
 # Background image code
-set_background_from_url('https://raw.githubusercontent.com/Altaz33/grocereasy/main/Base%20colors%20ConjuWiz.webp')
+set_background_from_url('https://github.com/Altaz33/grocereasy/raw/main/Conjuwiz%20font-5.webp')
 
 # Function to insert data into the database
 def insert_into_db(product_dict):
