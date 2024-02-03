@@ -1,4 +1,6 @@
 import streamlit as st
+#base64 for background
+import base64
 import sqlite3
 import datetime
 import os
@@ -27,6 +29,23 @@ cursor.execute('''
 ''')
 conn.commit()
 
+#set background definitions
+def set_background(image_file):
+    with open(image_file, "rb") as file:
+        encoded = base64.b64encode(file.read()).decode()
+    st.markdown(
+        f"""
+        <style>
+        .stApp {{
+            background-image: url("data:image/webp;base64,{encoded}");
+            background-size: cover;
+        }}
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+# At the beginning of your Streamlit app
+set_background('path_to_your_image.webp')
 # Function to insert data into the database
 def insert_into_db(product_dict):
     cursor.execute('''
