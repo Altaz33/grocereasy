@@ -29,23 +29,24 @@ cursor.execute('''
 ''')
 conn.commit()
 
-#set background definitions
-def set_background(image_file):
-    with open(image_file, "rb") as file:
-        encoded = base64.b64encode(file.read()).decode()
-    st.markdown(
-        f"""
-        <style>
-        .stApp {{
-            background-image: url("data:image/webp;base64,{encoded}");
-            background-size: cover;
-        }}
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
+def set_background_from_url(url):
+    response = requests.get(url)
+    if response.status_code == 200:
+        st.markdown(
+            f"""
+            <style>
+            .stApp {{
+                background-image: url("data:image/webp;base64,{base64.b64encode(response.content).decode()}");
+                background-size: cover;
+            }}
+            </style>
+            """,
+            unsafe_allow_html=True
+        )
+
 # At the beginning of your Streamlit app
-set_background('path_to_your_image.webp')
+set_background_from_url('https://raw.githubusercontent.com/Altaz33/grocereasy/main/Base%20colors%20ConjuWiz.webp')
+
 # Function to insert data into the database
 def insert_into_db(product_dict):
     cursor.execute('''
